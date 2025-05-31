@@ -73,6 +73,8 @@
             Controls.Add(btnAddTask);
             Controls.Add(txtboxAddTask);
             Controls.Add(lblTaskAdder);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "AddTaskForm";
             Text = "Добавлятор";
             ResumeLayout(false);

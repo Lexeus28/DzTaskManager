@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using System.Resources;
 
 namespace DzTaskManager
@@ -25,8 +26,8 @@ namespace DzTaskManager
             listBoxTasks.DataSource = null;
             var tasks = await _taskService.GetAllTasksAsync();
 
-            listBoxTasks.DisplayMember = "Description"; 
-            listBoxTasks.ValueMember = "Task_id";        
+            listBoxTasks.DisplayMember = "Description";
+            listBoxTasks.ValueMember = "Task_id";
             listBoxTasks.DataSource = tasks;
         }
 
@@ -39,7 +40,6 @@ namespace DzTaskManager
                 return;
             }
 
-            // Получаем Id выбранной задачи
             var selectedTaskId = (Guid)listBoxTasks.SelectedValue;
 
             DialogResult result = MessageBox.Show(
@@ -51,6 +51,33 @@ namespace DzTaskManager
             if (result == DialogResult.Yes)
             {
                 await _taskService.DeleteTaskAsync(selectedTaskId);
+                await UpdateTaskListAsync();
+            }
+        }
+        private void HandleTaskSelection(object sender, EventArgs e)
+        {
+            if (listBoxTasks.SelectedItem != null)
+            {
+                var selectedTask = (UserTask)listBoxTasks.SelectedItem;
+                txtboxEditTask.Text = selectedTask.Description;
+                if (selectedTask.IsCompleted)
+                {
+                    rbtnCompleted.Checked = true;
+                }
+                else
+                {
+                    rbtnInProcessing.Checked = true;
+                }
+            }
+        }
+
+        private async void btnConfirmEditing_Click(object sender, EventArgs e)
+        {
+            if (listBoxTasks.SelectedItem is UserTask selectedTask && !string.IsNullOrWhiteSpace(txtboxEditTask.Text))
+            {
+                selectedTask.Description = txtboxEditTask.Text;
+                selectedTask.IsCompleted = rbtnCompleted.Checked;
+                await _taskService.UpdateTaskAsync(selectedTask);
                 await UpdateTaskListAsync();
             }
         }

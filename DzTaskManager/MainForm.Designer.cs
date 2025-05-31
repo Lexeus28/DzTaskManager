@@ -34,11 +34,11 @@
             btnDeleteTask = new Button();
             txtboxEditTask = new TextBox();
             lblEdit = new Label();
-            lblInstructionEdit = new Label();
-            panel1 = new Panel();
+            panelCompleted = new Panel();
             rbtnInProcessing = new RadioButton();
             rbtnCompleted = new RadioButton();
-            panel1.SuspendLayout();
+            btnConfirmEditing = new Button();
+            panelCompleted.SuspendLayout();
             SuspendLayout();
             // 
             // listBoxTasks
@@ -50,6 +50,7 @@
             listBoxTasks.Name = "listBoxTasks";
             listBoxTasks.Size = new Size(270, 259);
             listBoxTasks.TabIndex = 0;
+            listBoxTasks.SelectedIndexChanged += HandleTaskSelection;
             // 
             // btnAddTask
             // 
@@ -105,23 +106,14 @@
             lblEdit.TabIndex = 5;
             lblEdit.Text = "Редактирование";
             // 
-            // lblInstructionEdit
+            // panelCompleted
             // 
-            lblInstructionEdit.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblInstructionEdit.Location = new Point(523, 208);
-            lblInstructionEdit.Name = "lblInstructionEdit";
-            lblInstructionEdit.Size = new Size(265, 95);
-            lblInstructionEdit.TabIndex = 6;
-            lblInstructionEdit.Text = "Для редактирования выберите задачу из списка, измените её через текстовое поле сверху и нажмите Enter";
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(rbtnInProcessing);
-            panel1.Controls.Add(rbtnCompleted);
-            panel1.Location = new Point(523, 179);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(265, 26);
-            panel1.TabIndex = 7;
+            panelCompleted.Controls.Add(rbtnInProcessing);
+            panelCompleted.Controls.Add(rbtnCompleted);
+            panelCompleted.Location = new Point(523, 179);
+            panelCompleted.Name = "panelCompleted";
+            panelCompleted.Size = new Size(265, 26);
+            panelCompleted.TabIndex = 7;
             // 
             // rbtnInProcessing
             // 
@@ -145,14 +137,27 @@
             rbtnCompleted.Text = "выполнено";
             rbtnCompleted.UseVisualStyleBackColor = true;
             // 
+            // btnConfirmEditing
+            // 
+            btnConfirmEditing.BackColor = Color.FromArgb(255, 255, 192);
+            btnConfirmEditing.FlatStyle = FlatStyle.Flat;
+            btnConfirmEditing.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnConfirmEditing.Location = new Point(526, 225);
+            btnConfirmEditing.Name = "btnConfirmEditing";
+            btnConfirmEditing.Size = new Size(259, 28);
+            btnConfirmEditing.TabIndex = 8;
+            btnConfirmEditing.Text = "Подтвердить изменения";
+            btnConfirmEditing.UseVisualStyleBackColor = false;
+            btnConfirmEditing.Click += btnConfirmEditing_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
-            Controls.Add(lblInstructionEdit);
+            Controls.Add(btnConfirmEditing);
+            Controls.Add(panelCompleted);
             Controls.Add(lblEdit);
             Controls.Add(txtboxEditTask);
             Controls.Add(btnDeleteTask);
@@ -160,10 +165,12 @@
             Controls.Add(btnAddTask);
             Controls.Add(listBoxTasks);
             ForeColor = SystemColors.ControlText;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "MainForm";
             Text = "Управлятор";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelCompleted.ResumeLayout(false);
+            panelCompleted.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -176,9 +183,9 @@
         private Button btnDeleteTask;
         private TextBox txtboxEditTask;
         private Label lblEdit;
-        private Label lblInstructionEdit;
-        private Panel panel1;
+        private Panel panelCompleted;
         private RadioButton rbtnInProcessing;
         private RadioButton rbtnCompleted;
+        private Button btnConfirmEditing;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 namespace DzTaskManager
 {
     public class TaskDBContext : DbContext
