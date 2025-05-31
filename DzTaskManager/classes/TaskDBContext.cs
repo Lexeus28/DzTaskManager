@@ -1,21 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DzTaskManager.DBclasses
+namespace DzTaskManager
 {
-    class TaskDBContext : DbContext
+    public class TaskDBContext : DbContext
     {
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<UserTask> Tasks { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Data Source=TaskManagerDB.db";
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlite("Data Source=TaskManagerDB.db");
         }
-
     }
-
 }

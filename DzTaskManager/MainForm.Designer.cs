@@ -35,6 +35,10 @@
             txtboxEditTask = new TextBox();
             lblEdit = new Label();
             lblInstructionEdit = new Label();
+            panel1 = new Panel();
+            rbtnInProcessing = new RadioButton();
+            rbtnCompleted = new RadioButton();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // listBoxTasks
@@ -58,6 +62,7 @@
             btnAddTask.TabIndex = 1;
             btnAddTask.Text = "добавить задачу";
             btnAddTask.UseVisualStyleBackColor = false;
+            btnAddTask.Click += btnAddTask_Click;
             // 
             // lblTaskManager
             // 
@@ -80,6 +85,7 @@
             btnDeleteTask.TabIndex = 3;
             btnDeleteTask.Text = "удалить задачу";
             btnDeleteTask.UseVisualStyleBackColor = false;
+            btnDeleteTask.Click += btnDeleteTask_Click;
             // 
             // txtboxEditTask
             // 
@@ -102,11 +108,42 @@
             // lblInstructionEdit
             // 
             lblInstructionEdit.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblInstructionEdit.Location = new Point(523, 176);
+            lblInstructionEdit.Location = new Point(523, 208);
             lblInstructionEdit.Name = "lblInstructionEdit";
             lblInstructionEdit.Size = new Size(265, 95);
             lblInstructionEdit.TabIndex = 6;
             lblInstructionEdit.Text = "Для редактирования выберите задачу из списка, измените её через текстовое поле сверху и нажмите Enter";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(rbtnInProcessing);
+            panel1.Controls.Add(rbtnCompleted);
+            panel1.Location = new Point(523, 179);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(265, 26);
+            panel1.TabIndex = 7;
+            // 
+            // rbtnInProcessing
+            // 
+            rbtnInProcessing.AutoSize = true;
+            rbtnInProcessing.Location = new Point(104, 3);
+            rbtnInProcessing.Name = "rbtnInProcessing";
+            rbtnInProcessing.Size = new Size(158, 19);
+            rbtnInProcessing.TabIndex = 1;
+            rbtnInProcessing.TabStop = true;
+            rbtnInProcessing.Text = "в процессе выполнения";
+            rbtnInProcessing.UseVisualStyleBackColor = true;
+            // 
+            // rbtnCompleted
+            // 
+            rbtnCompleted.AutoSize = true;
+            rbtnCompleted.Location = new Point(3, 3);
+            rbtnCompleted.Name = "rbtnCompleted";
+            rbtnCompleted.Size = new Size(88, 19);
+            rbtnCompleted.TabIndex = 0;
+            rbtnCompleted.TabStop = true;
+            rbtnCompleted.Text = "выполнено";
+            rbtnCompleted.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -114,6 +151,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
             Controls.Add(lblInstructionEdit);
             Controls.Add(lblEdit);
             Controls.Add(txtboxEditTask);
@@ -124,6 +162,8 @@
             ForeColor = SystemColors.ControlText;
             Name = "MainForm";
             Text = "Управлятор";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -137,5 +177,8 @@
         private TextBox txtboxEditTask;
         private Label lblEdit;
         private Label lblInstructionEdit;
+        private Panel panel1;
+        private RadioButton rbtnInProcessing;
+        private RadioButton rbtnCompleted;
     }
 }

@@ -30,7 +30,7 @@
         {
             lblTaskAdder = new Label();
             txtboxAddTask = new TextBox();
-            lblInstructionAdd = new Label();
+            btnAddTask = new Button();
             SuspendLayout();
             // 
             // lblTaskAdder
@@ -51,14 +51,18 @@
             txtboxAddTask.Size = new Size(464, 108);
             txtboxAddTask.TabIndex = 5;
             // 
-            // lblInstructionAdd
+            // btnAddTask
             // 
-            lblInstructionAdd.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblInstructionAdd.Location = new Point(12, 159);
-            lblInstructionAdd.Name = "lblInstructionAdd";
-            lblInstructionAdd.Size = new Size(464, 61);
-            lblInstructionAdd.TabIndex = 7;
-            lblInstructionAdd.Text = "Добавляйте задачи, записывая их в текстовое поле сверху";
+            btnAddTask.BackColor = Color.FromArgb(128, 255, 255);
+            btnAddTask.FlatStyle = FlatStyle.Flat;
+            btnAddTask.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAddTask.Location = new Point(108, 177);
+            btnAddTask.Name = "btnAddTask";
+            btnAddTask.Size = new Size(256, 28);
+            btnAddTask.TabIndex = 8;
+            btnAddTask.Text = "добавить задачу";
+            btnAddTask.UseVisualStyleBackColor = false;
+            btnAddTask.Click += btnAdd_Click;
             // 
             // AddTaskForm
             // 
@@ -66,7 +70,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(192, 192, 255);
             ClientSize = new Size(488, 229);
-            Controls.Add(lblInstructionAdd);
+            Controls.Add(btnAddTask);
             Controls.Add(txtboxAddTask);
             Controls.Add(lblTaskAdder);
             Name = "AddTaskForm";
@@ -79,6 +83,6 @@
 
         private Label lblTaskAdder;
         private TextBox txtboxAddTask;
-        private Label lblInstructionAdd;
+        private Button btnAddTask;
     }
 }

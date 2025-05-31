@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace DzTaskManager
+﻿namespace DzTaskManager
 {
-    public partial class AddTaskForm: Form
+    public partial class AddTaskForm : Form
     {
-        public AddTaskForm()
+        ITaskService _taskService;
+        public AddTaskForm(ITaskService taskService)
         {
             InitializeComponent();
+            _taskService = taskService;
+        }
+        private async void btnAdd_Click(object sender, EventArgs e)
+        {
+            await _taskService.CreateTaskAsync(txtboxAddTask.Text.Trim(), false);
+            MessageBox.Show("Задача успешно добавлена",
+             "Успех",
+             MessageBoxButtons.OK,
+             MessageBoxIcon.Information);
+            this.Close();
         }
     }
 }

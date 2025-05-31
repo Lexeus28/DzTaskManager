@@ -1,18 +1,27 @@
-namespace DzTaskManager
+using DzTaskManager;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+internal static class Program
 {
-    internal static class Program
+    [STAThread]
+    static void Main()
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            SQLitePCL.Batteries.Init();
-            ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
-        }
+        SQLitePCL.Batteries.Init();
+
+        var services = new ServiceCollection();
+        var context = new TaskDBContext();
+        context.Database.Migrate();
+
+        services.AddTransient<TaskDBContext>();
+        services.AddTransient<ITaskRepository, SQLiteTaskRepository>();
+        services.AddTransient<ITaskService, TaskService>();
+
+        var provider = services.BuildServiceProvider();
+
+        ApplicationConfiguration.Initialize();
+
+        var mainForm = new MainForm(provider.GetRequiredService<ITaskService>());
+        Application.Run(mainForm);
     }
 }

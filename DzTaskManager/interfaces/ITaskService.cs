@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DzTaskManager.interfaces
+﻿namespace DzTaskManager
 {
-    interface ITaskService
+    public interface ITaskService
     {
+        Task<List<UserTask>> GetAllTasksAsync();
+        Task<UserTask> GetTaskByIdAsync(Guid id);
+        Task CreateTaskAsync(string description, bool isCompleted);
+        Task UpdateTaskAsync(UserTask task);
+        Task MarkAsCompletedAsync(Guid id);
+        Task DeleteTaskAsync(Guid id);
     }
 }
